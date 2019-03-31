@@ -9,20 +9,20 @@ class ContentSearch {
         this.apiKey = apiKey
     }
 
-    image_search(keywords = '', licenses = '', l_type = '', provider = '', page = 1, page_size = 20, creator = '', tags = '', title = '', filter_dead = true) {
+    image_search(q = '', li = '', lt = '', provider = '', page = 1, page_size = 20, creator = '', tags = '', title = '', filter_dead = true) {
         
         // Parameter Validation
-        if (!keywords || !licenses || !l_type || !provider) { return }
+        if (!q || !li || !lt || !provider) { return }
         else if(creator.length > 200 || creator.length < 1 || tags.length > 200 || tags.length < 1 || title.length > 200 || title.length < 1) {
             return
         }
-        else if (!licenses) {
+        else if (!li) {
             let valid_types = ['PDM', 'BY-SA', 'BY-ND', 'CC0', 'BY-NC-ND', 'BY-NC', 'BY-NC-SA', 'BY'];
-            if (!valid_types.includes(licenses.split(','))) { return }
+            if (!valid_types.includes(li.split(','))) { return }
         }
-        else if (!l_type) {
+        else if (!lt) {
             let valid_types = ['all', 'all-cc', 'commercial', 'modification'];
-            if (!valid_types.includes(l_type.split(','))) { return }
+            if (!valid_types.includes(lt.split(','))) { return }
         }
         else if (!provider) {
             let valid_types = ['thingiverse', 'sciencemuseum', 'rijksmuseum', 'nypl', 'nhl', 
@@ -36,9 +36,9 @@ class ContentSearch {
         // Make request if everything is fine
         else {
             let parameters = {
-                keywords,
-                licenses,
-                l_type,
+                q,
+                li,
+                lt,
                 provider,
                 page,
                 page_size,
@@ -54,9 +54,9 @@ class ContentSearch {
 
     // Implementation 1
     _sendRequest(type, parameters={}) {
-        let q = parameters.keywords,
-            li = parameters.licenses,
-            lt = parameters.l_type,
+        let q = parameters.q,
+            li = parameters.li,
+            lt = parameters.lt,
             provider = parameters.provider,
             page = parameters.page,
             page_size = parameters.page_size,
