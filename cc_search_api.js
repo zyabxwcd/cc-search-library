@@ -84,15 +84,15 @@ class ContentSearch {
         })
     }
 
-    // Alternate implementation
-    _sendRequest(type, parameters={}) {
+    // Alternate implementation, uses fetch Web API
+    _sendRequest(type = '', parameters = {}) {
         let params = parameters;
 
         const url = new URL(`${baseUrl}/${type}`);
         url.search = new URLSearchParams(params);
 
         fetch(url)
-        .then(data=>{ return data.json()})
+        .then(data => { return data.json() })
     }
 }
 
