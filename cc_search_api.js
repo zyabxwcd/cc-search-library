@@ -1,7 +1,7 @@
 // Class based approach
 
 // const request = require('request');
-const baseUrl = new URL('https://api.creativecommons.engineering');
+const baseUrl = 'https://api.creativecommons.engineering';
 
 class ContentSearch {
 
@@ -88,7 +88,7 @@ class ContentSearch {
     _sendRequest(type, parameters={}) {
         let params = parameters;
 
-        const url = `${baseUrl}/${type}`;
+        const url = new URL(`${baseUrl}/${type}`);
         url.search = new URLSearchParams(params);
 
         fetch(url)
