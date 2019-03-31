@@ -1,7 +1,7 @@
 // Class based approach
 
-const request = require('request');
-const baseUri = "https://api.creativecommons.engineering";
+// const request = require('request');
+const baseUrl = new URL('https://api.creativecommons.engineering');
 
 class ContentSearch {
 
@@ -52,6 +52,7 @@ class ContentSearch {
         }
     }
 
+    // Implementation 1
     _sendRequest(type, parameters={}) {
         let q = parameters.keywords,
             li = parameters.licenses,
@@ -64,10 +65,11 @@ class ContentSearch {
             title = parameters.title,
             filter_dead = parameters.filter_dead;
 
-        const url = `${baseUri}/${type}?q=${q}&li=${li}&lt=${lt}&provider=${provider}
+        const url = `${baseUrl}/${type}?q=${q}&li=${li}&lt=${lt}&provider=${provider}
                      &page=${page}&page_size=${page_size}&creator=${creator}&tags=${tags}
                      &title=${title}&filter_dead=${filter_dead}`
-
+        
+        // Sending an anonymous request
         request(url, function (error, response, body) {
             if (!error & response.statusCode === 200) {
                 body.json().then(function(data) {
@@ -80,6 +82,17 @@ class ContentSearch {
                 }); 
             }
         })
+    }
+
+    // Alternate implementation
+    _sendRequest(type, parameters={}) {
+        let params = parameters;
+
+        const url = `${baseUrl}/${type}`;
+        url.search = new URLSearchParams(params);
+
+        fetch(url)
+        .then(data=>{ return data.json()})
     }
 }
 
