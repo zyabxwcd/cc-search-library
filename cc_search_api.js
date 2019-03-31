@@ -53,11 +53,31 @@ class ContentSearch {
     }
 
     _sendRequest(type, parameters={}) {
-        const url = `${baseUri}/${type}`
+        let q = parameters.keywords,
+            li = parameters.licenses,
+            lt = parameters.l_type,
+            provider = parameters.provider,
+            page = parameters.page,
+            page_size = parameters.page_size,
+            creator = parameters.creator,
+            tags = parameters.tags,
+            title = parameters.title,
+            filter_dead = parameters.filter_dead;
+
+        const url = `${baseUri}/${type}?q=${q}&li=${li}&lt=${lt}&provider=${provider}
+                     &page=${page}&page_size=${page_size}&creator=${creator}&tags=${tags}
+                     &title=${title}&filter_dead=${filter_dead}`
 
         request(url, function (error, response, body) {
             if (!error & response.statusCode === 200) {
-                // 
+                body.json().then(function(data) {
+                    return data; 
+                }); 
+            }
+            else if (!error & response.statusCode === 400) {
+                body.json().then(function(data) {
+                    return data; 
+                }); 
             }
         })
     }
