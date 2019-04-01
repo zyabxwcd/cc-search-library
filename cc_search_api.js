@@ -5,6 +5,7 @@ const baseUrl = 'https://api.creativecommons.engineering';
 
 class ContentSearch {
 
+    // to be completed after implementing OAuth wrapper
     constructor(apiKey) {
         this.apiKey = apiKey
     }
@@ -52,7 +53,7 @@ class ContentSearch {
         }
     }
 
-    image_detail(identifier='') {
+    image_detail(identifier = '') {
 
         if(!identifier) { return }
         else {
@@ -60,39 +61,7 @@ class ContentSearch {
         }
     }
 
-    // Implementation 1
-    _sendRequest(type, parameters={}) {
-        let q = parameters.q,
-            li = parameters.li,
-            lt = parameters.lt,
-            provider = parameters.provider,
-            page = parameters.page,
-            page_size = parameters.page_size,
-            creator = parameters.creator,
-            tags = parameters.tags,
-            title = parameters.title,
-            filter_dead = parameters.filter_dead;
-
-        const url = `${baseUrl}/${type}?q=${q}&li=${li}&lt=${lt}&provider=${provider}
-                     &page=${page}&page_size=${page_size}&creator=${creator}&tags=${tags}
-                     &title=${title}&filter_dead=${filter_dead}`
-        
-        // Sending an anonymous request
-        request(url, function (error, response, body) {
-            if (!error & response.statusCode === 200) {
-                body.json().then(function(data) {
-                    return data; 
-                }); 
-            }
-            else if (!error & response.statusCode === 400) {
-                body.json().then(function(data) {
-                    return data; 
-                }); 
-            }
-        })
-    }
-
-    // Alternate implementation, uses fetch Web API
+    // uses fetch Web API
     _sendRequest(type = '', parameters = {}) {
         let params = parameters;
 
