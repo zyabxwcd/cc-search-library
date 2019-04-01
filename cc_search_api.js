@@ -52,6 +52,14 @@ class ContentSearch {
         }
     }
 
+    image_detail(identifier='') {
+
+        if(!identifier) { return }
+        else {
+            this._sendRequest(`/image/${identifier}`)
+        }
+    }
+
     // Implementation 1
     _sendRequest(type, parameters={}) {
         let q = parameters.q,
