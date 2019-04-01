@@ -1,6 +1,5 @@
 // Class based approach
 
-// const request = require('request');
 const baseUrl = 'https://api.creativecommons.engineering';
 
 class ContentSearch {
