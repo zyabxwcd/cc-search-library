@@ -60,6 +60,13 @@ class ContentSearch {
         }
     }
 
+    link_resolve(path = '') {
+        if(!path) { return }
+        else {
+            this._sendRequest(`/link/${path}`)
+        }
+    }
+
     // uses fetch Web API
     _sendRequest(type = '', parameters = {}) {
         let params = parameters;
