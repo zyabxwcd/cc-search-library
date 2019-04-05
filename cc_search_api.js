@@ -67,6 +67,13 @@ class ContentSearch {
         }
     }
 
+    watermark_read(identifier = '') {
+        if(!identifier) { return }
+        else {
+            this._sendRequest(`/watermark/${identifier}`)
+        }
+    }
+
     // uses fetch Web API
     _sendRequest(type = '', parameters = {}) {
         let params = parameters;
