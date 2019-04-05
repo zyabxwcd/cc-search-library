@@ -79,6 +79,8 @@ class ContentSearch {
         let params = parameters;
 
         const url = new URL(`${baseUrl}/${type}`);
+
+        // attach query parameters
         url.search = new URLSearchParams(params);
 
         fetch(url)
