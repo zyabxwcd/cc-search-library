@@ -48,7 +48,7 @@ class ContentSearch {
                 filter_dead
             }
 
-            this._sendRequest("/image/search", parameters)
+            return this._sendRequest("/image/search", parameters)
         }
     }
 
@@ -56,21 +56,21 @@ class ContentSearch {
 
         if(!identifier) { return }
         else {
-            this._sendRequest(`/image/${identifier}`)
+            return this._sendRequest(`/image/${identifier}`)
         }
     }
 
     link_resolve(path = '') {
         if(!path) { return }
         else {
-            this._sendRequest(`/link/${path}`)
+            return this._sendRequest(`/link/${path}`)
         }
     }
 
     watermark_read(identifier = '') {
         if(!identifier) { return }
         else {
-            this._sendRequest(`/watermark/${identifier}`)
+            return this._sendRequest(`/watermark/${identifier}`)
         }
     }
 
