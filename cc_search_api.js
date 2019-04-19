@@ -48,7 +48,7 @@ const CCSearch = (function() {
                     filter_dead
                 }
 
-                this._sendRequest("/image/search", parameters)
+                return this._sendRequest("/image/search", parameters)
             }
         },
 
@@ -56,24 +56,28 @@ const CCSearch = (function() {
 
             if(!identifier) { return }
             else {
-                this._sendRequest(`/image/${identifier}`)
+                return this._sendRequest(`/image/${identifier}`)
             }
         },
 
         link_resolve: function(path = '') {
             if(!path) { return }
             else {
-                this._sendRequest(`/link/${path}`)
+                return this._sendRequest(`/link/${path}`)
             }
         },
     
         watermark_read: function(identifier = '') {
             if(!identifier) { return }
             else {
-                this._sendRequest(`/watermark/${identifier}`)
+                return this._sendRequest(`/watermark/${identifier}`)
             }
         },
-    
+
+        image_stats: function() {
+            return this._sendRequest('/statistics/image/')
+        }
+
         // uses fetch Web API
         _sendRequest: function(type = '', parameters = {}) {
             let params = parameters;
